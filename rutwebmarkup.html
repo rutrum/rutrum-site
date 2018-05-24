@@ -20,15 +20,31 @@
                 <li>basically to avoid starting and ending tags</li>
                 <li>or like li < p as in css</li>
                 <li>css is really the model for this, it is done very well and cleanly</li>
+                <li>also classes and ids should be done as so: p.code#top with a special key (say ^) for styling, etc</li>
+                <li>then there also needs to be optional parameters for other attributes as well, maybe like params on a function</li>
+                <li>also implicit bracing for single child elements, which would be super nice</li>
             </ul>
         </li>
         <li>need to understand how to identify keywords
             <ul>
                 <li>in html anything inside the brackets is a keyword
                      it could be anything (and should be)</li>
+                <li>aha! but all strings are in quotes, so everything not in "" must be a keyword</li>
             </ul>
         </li>
-        <li>but it totally needs to not give a shit about whitespace, which html currently does</li>
+        <li>but it totally needs to not give a shit about whitespace, which html currently does
+            <ul>
+                <li>like really none at all. so that way "p.code" and "p .code" are the same (think newline)</li>
+            </ul>
+        </li>
+        <li>and strings should all be in "" not out in the open</li>
+        <li>maybe if I get really good I can induce function calls or macros and then a standard library
+            <ul>
+                <li>for example, a function that generates the information in the head tag</li>
+            </ul>
+        </li>
+        <li>and then I can have fun making my own extensions for vscode and notepad++ for the world to enjoy!</li>
+        <li>also, lets fix h1, h2,... they are so stupid.  lets just create a general header tag with an attribute specific to rutwm</li>
     </ul>
 
 </body>
