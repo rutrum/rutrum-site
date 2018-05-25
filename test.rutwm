@@ -1,0 +1,22 @@
+// This is a test
+
+/*
+Hopefully I can implement some of these in colors by my IDE
+*/
+
+html {
+    head {
+        title "rutwm testing"
+    }
+    body {
+        p.code#first-paragraph {
+            "this is the content for my paragraph with class *code*
+            and id _first-paragraph_"
+            //maybe have some italics and bold recognition in string analysis?
+        }
+        p {
+            "this is the second paragraph with a " 
+            a|href(google.com) "link" "to google.com" 
+        }
+    }
+}
