@@ -4,6 +4,11 @@
 Hopefully I can implement some of these in colors by my IDE
 */
 
+vars {
+    maincolor(#124313)
+    secondcolor(#1155AA)
+}
+
 html {
     head {
         title "rutwm testing"
@@ -18,5 +23,26 @@ html {
             "this is the second paragraph with a " 
             a|href(google.com) "link" "to google.com" 
         }
+        div .class1.class2.class3
+                #id1#id2
+                ^height(40px)^border(1px, solid, $maincolor)
+                |focus(true)|name(thing) {
+            "this is an example of a tag with a lot of attributes"
+        }
     }
 }
+
+**The above should compile to the following**
+
+<html>
+    <head>
+        <title>rutwm testing</title>
+    </head>
+    <body>
+        <p class="code" id="first-paragraph">
+            This is the content for my paragraph with class <strong>code</strong>
+            and id <italics>first-paragraph</italics>
+        </p>
+        ...
+    </body>
+</html>
