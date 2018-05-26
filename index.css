@@ -1,3 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0 solid black;
+}
+
 body {
-    padding: 300px;
+    padding: 50px;
+}
+
+h1 {
+    margin: 15px 0;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+a:hover {
+    color: rgb(114, 167, 114);
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.code {
+    font-family: "courier new"
 }
