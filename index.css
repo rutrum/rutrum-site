@@ -29,7 +29,7 @@ header {
 }
 
 section {
-    padding: 50px;
+    padding: 50px 200px;
 }
 
 h1 {
@@ -40,6 +40,10 @@ h1 {
 h1 a {
     color: var(--yellow1);
     text-decoration: none;
+}
+
+h1 a:hover {
+    color: var(--almost-white);
 }
 
 h3 {
@@ -54,25 +58,12 @@ a:hover {
     color: var(--green1);
 }
 
-h1 a:hover {
-    color: var(--almost-white);
-}
-
 ul {
     padding-left: 20px;
 }
 
 .code {
     font-family: "courier new"
-}
-
-.color-box {
-    display: inline-block;
-    height: 65px;
-    width: 150px;
-    margin: 10px;
-    padding: 3px;
-    border: 4px dotted grey;
 }
 
 .black-background { background-color: var(--almost-black); }

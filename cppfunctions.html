@@ -4,6 +4,20 @@
 <head>
     <title>rutrum : cpp functions</title>
     <link rel="stylesheet" href="./index.css">
+    <style>
+        .code-generator {
+            border-left: 3px solid var(--green1);
+            padding: 10px;
+            display: flex;
+        }
+        .code-generator form {
+            position: relative;
+        }
+        .code-generator .code {
+            position: relative;
+            left: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,25 +32,21 @@
             <li>I should be able to go through a form that selects the right language and printing options</li>
         </ul>
         
-        <h4>print array</h4>
-        <p class="code">
-            void printArray(int[] a, int l) { <br />
-            &nbsp;&nbsp;&nbsp;for (int i = 0; i < l; i++) { <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << a[i] << endl; <br />
-            &nbsp;&nbsp;&nbsp;} <br />
-            }
-        </p>
-        
-        <form id="print-function-form" style="border: 2px solid black; margin:10px; padding:20px">
-            <label for="delimiter">Delimiter:</label><br />
-            <input type="radio" name="delimiter" value="space"/>Space<br />
-            <input type="radio" name="delimiter" value="comma-space"/>Comma-Space<br />
-            <input type="radio" name="delimiter" value="newline"/>Newline<br />
-            <input type="submit">
-        </form>
-        
-        <div id="print-array-generation" class="code"></div>
+        <h3>Print array function generator</h3>
+        <article class="code-generator">
+            <form id="print-function-form">
+                <label for="delimiter">Delimiter:</label><br />
+                <input type="radio" name="delimiter" value="space"/>Space<br />
+                <input type="radio" name="delimiter" value="comma-space"/>Comma-Space<br />
+                <input type="radio" name="delimiter" value="newline"/>Newline<br />
+                <input type="submit">
+            </form>
+            
+            <div id="print-array-generation" class="code"></div>
+        </article>
     </section>
+
+    
 
     <script>
         function addListeners() {
