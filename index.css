@@ -1,7 +1,21 @@
+:root {
+    --almost-black: rgb(8, 8, 8);
+    --almost-white: rgb(247,247,247);
+    --green1: rgb(106, 167, 91);
+    --green2: rgb(69, 107, 60);
+    --purple1: rgb(125, 66, 165);
+    --purple2: rgb(77, 41, 100);
+    --yellow1: rgb(224, 224, 68);
+    --yellow2: rgb(179, 179, 57);
+    --pink1: rgb(230, 119, 180);
+    --pink2: rgb(184, 94, 142);
+}
+
 * {
     padding: 0;
     margin: 0;
-    border: 0 solid black;
+    border: 0 solid var(--almost-black);
+    color: var(--almost-black);
 }
 
 body {
@@ -16,8 +30,12 @@ h3 {
     margin: 10px 0;
 }
 
+a {
+    color: var(--purple1);
+}
+
 a:hover {
-    color: rgb(114, 167, 114);
+    color: var(--green1);
 }
 
 ul {
