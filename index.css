@@ -5,8 +5,8 @@
     --green2: rgb(69, 107, 60);
     --purple1: rgb(125, 66, 165);
     --purple2: rgb(77, 41, 100);
-    --yellow1: rgb(224, 224, 68);
-    --yellow2: rgb(179, 179, 57);
+    --yellow1: rgb(247, 247, 150);
+    --yellow2: rgb(212, 212, 133);
     --pink1: rgb(230, 119, 180);
     --pink2: rgb(184, 94, 142);
 }
@@ -24,7 +24,8 @@ body {
 }
 
 h1 {
-    margin: 15px 0;
+    padding: 15px;
+    /* background-color: var(--yellow1); */
 }
 
 h3 {
