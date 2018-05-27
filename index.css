@@ -27,3 +27,23 @@ ul {
 .code {
     font-family: "courier new"
 }
+
+.color-box {
+    display: inline-block;
+    height: 65px;
+    width: 150px;
+    margin: 10px;
+    padding: 3px;
+    border: 4px dotted grey;
+}
+
+.black { background-color: rgb(8, 8, 8); }
+.white { background-color: rgb(247,247,247); }
+.green1 { background-color: rgb(106, 167, 91); }
+.green2 { background-color: rgb(69, 107, 60); }
+.purple1 { background-color: rgb(125, 66, 165); }
+.purple2 { background-color: rgb(77, 41, 100); }
+.yellow1 { background-color: rgb(224, 224, 68); }
+.yellow2 { background-color: rgb(179, 179, 57); }
+.pink1 { background-color: rgb(230, 119, 180); }
+.pink2 { background-color: rgb(184, 94, 142); }
