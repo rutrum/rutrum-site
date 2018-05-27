@@ -1,11 +1,12 @@
 :root {
     --almost-black: rgb(8, 8, 8);
     --almost-white: rgb(252, 252, 252);
-    --green1: rgb(106, 167, 91);
-    --green2: rgb(69, 107, 60);
-    --purple1: rgb(125, 66, 165);
-    --purple2: rgb(77, 41, 100);
-    --yellow1: rgb(247, 247, 150);
+    --green1: rgb(114, 190, 94);
+    --green2: rgb(49, 165, 23);
+    --purple1: rgba(138, 72, 182);
+    --purple2: rgba(77, 41, 100);
+    --purple3: rgb(232, 196, 255);
+    --yellow1: rgb(255, 255, 174);
     --yellow2: rgb(212, 212, 133);
     --pink1: rgb(230, 119, 180);
     --pink2: rgb(184, 94, 142);
@@ -20,12 +21,25 @@
 
 body {
     background-color: var(--almost-white);
+}
+
+header {
+    background: linear-gradient(var(--pink1), var(--purple2));
+    padding: 15px 100px;
+}
+
+section {
     padding: 50px;
 }
 
 h1 {
     padding: 15px;
-    /* background-color: var(--yellow1); */
+    font-size: 40px;
+}
+
+h1 a {
+    color: var(--yellow1);
+    text-decoration: none;
 }
 
 h3 {
@@ -38,6 +52,10 @@ a {
 
 a:hover {
     color: var(--green1);
+}
+
+h1 a:hover {
+    color: var(--almost-white);
 }
 
 ul {
