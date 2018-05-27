@@ -1,6 +1,6 @@
 :root {
     --almost-black: rgb(8, 8, 8);
-    --almost-white: rgb(247,247,247);
+    --almost-white: rgb(252, 252, 252);
     --green1: rgb(106, 167, 91);
     --green2: rgb(69, 107, 60);
     --purple1: rgb(125, 66, 165);
@@ -19,6 +19,7 @@
 }
 
 body {
+    background-color: var(--almost-white);
     padding: 50px;
 }
 
@@ -55,13 +56,13 @@ ul {
     border: 4px dotted grey;
 }
 
-.black { background-color: rgb(8, 8, 8); }
-.white { background-color: rgb(247,247,247); }
-.green1 { background-color: rgb(106, 167, 91); }
-.green2 { background-color: rgb(69, 107, 60); }
-.purple1 { background-color: rgb(125, 66, 165); }
-.purple2 { background-color: rgb(77, 41, 100); }
-.yellow1 { background-color: rgb(224, 224, 68); }
-.yellow2 { background-color: rgb(179, 179, 57); }
-.pink1 { background-color: rgb(230, 119, 180); }
-.pink2 { background-color: rgb(184, 94, 142); }
+.black-background { background-color: var(--almost-black); }
+.white-background { background-color: var(--almost-white); }
+.green1-background { background-color: var(--green1); }
+.green2-background { background-color: var(--green2); }
+.purple1-background { background-color: var(--purple1); }
+.purple2-background { background-color: var(--purple2); }
+.yellow1-background { background-color: var(--yellow1); }
+.yellow2-background { background-color: var(--yellow2); }
+.pink1-background { background-color: var(--pink1); }
+.pink2-background { background-color: var(--pink2); }
