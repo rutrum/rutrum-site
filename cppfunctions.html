@@ -13,6 +13,10 @@
 
     <h3>list of useful c++ functions</h3>
 
+    <ul>
+        <li>I should be able to go through a form that selects the right language and printing options</li>
+    </ul>
+
     <h4>print array</h4>
     <p class="code">
         void printArray(int[] a, int l) { <br />
@@ -21,6 +25,51 @@
         &nbsp;&nbsp;&nbsp;} <br />
         }
     </p>
+
+    <form id="print-function-form" style="border: 2px solid black; margin:10px; padding:20px">
+        <label for="delimiter">Delimiter:</label><br />
+        <input type="radio" name="delimiter" value="space"/>Space<br />
+        <input type="radio" name="delimiter" value="comma-space"/>Comma-Space<br />
+        <input type="radio" name="delimiter" value="newline"/>Newline<br />
+        <input type="submit">
+    </form>
+
+    <div id="print-array-generation" class="code"></div>
+
+    <script>
+        function addListeners() {
+            document.querySelector('#print-function-form')
+                .addEventListener('submit', generatePrintFunction)
+        }
+
+        function generatePrintFunction(event) {
+            event.preventDefault()
+            const form = event.target
+            const delimiter = form.delimiter.value
+
+            let output = 
+                    "void printArray(int[] a, int l) { <br />"
+                    + "&nbsp;&nbsp;&nbsp;for (int i = 0; i < l; i++) { <br />"
+                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << a[i] << "
+
+            if (delimiter == "space") {
+                output += "\" \""
+            } else if (delimiter == "comma-space") {
+                output += "\", \""
+            } else if (delimiter == "newline") {
+                output += "endl"
+            }
+
+            output += "; <br />"
+                    + "&nbsp;&nbsp;&nbsp;} <br />"
+                    + "}"
+            
+            document.querySelector('#print-array-generation')
+                .innerHTML = output
+        }
+
+        window.onload = addListeners;
+    </script>
 
 </body>
 
