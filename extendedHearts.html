@@ -24,6 +24,10 @@
             border: 2px solid black;
             margin: 2px;
         }
+        .selected {
+            position: relative;
+            bottom: 10px; 
+        }
     </style>
 </head>
 
@@ -41,12 +45,27 @@
     </section>
 
     <section id="hearts">
-        <div class="card red">A ♥</div>
+        <div class="card red selected">A ♥</div>
         <div class="card">2 ♠</div>
     </section>
     
     <script>
-        
+        var suits = [1, 2, 3, 4] // spades hearts diamonds clubs
+        var values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]  // ... 10 J Q K A
+
+        function newCard(suit, value) {
+            let cardDOM = document.createElement("div")
+            cardDOM.className = "card"
+            cardDOM.innerHTML = "2 ♦"
+            return cardDOM;
+        }
+
+        function printCard() {
+            let card = newCard()
+            document.querySelector("#hearts").appendChild(card)
+        }
+
+        window.onload = printCard
     </script>
 
 </body>
