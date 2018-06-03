@@ -9,7 +9,7 @@
     --yellow1: rgb(255, 255, 174);
     --yellow2: rgb(212, 212, 133);
     --pink1: rgb(230, 119, 180);
-    --pink2: rgb(184, 94, 142);
+    --pink2: rgb(255, 218, 238);
 }
 
 * {
@@ -60,6 +60,20 @@ a:hover {
 
 ul {
     padding-left: 20px;
+}
+
+input {
+    margin: 4px;
+    padding: 4px;
+}
+
+form :last-child {
+    background-color: var(--almost-white);
+    border: 2px solid var(--green1);
+}
+
+form :last-child:hover {
+    border: 2px solid var(--green2);
 }
 
 .code {
