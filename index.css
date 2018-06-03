@@ -32,6 +32,12 @@ section {
     padding: 50px 200px;
 }
 
+@media (max-width: 900px) {
+    section {
+        padding: 50px 100px;
+    }
+}
+
 h1 {
     padding: 15px;
     font-size: 40px;
