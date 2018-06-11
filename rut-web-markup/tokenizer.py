@@ -78,27 +78,80 @@ def compile_next():
     if is_special(token):
         if token == "{":
             # should be compiling a start tag with class and id props
+            start_tag()
             compile_next()
         elif token == "}":
-            return
+            end_tag()
+            compile_next()
+        elif token == ".":
+            global classes
+            token = next_token()
+            classes.append(token)
+            print token
+            compile_next()
+        elif token == "#":
+            global ids
+            token = next_token()
+            ids.append(token)
+            print token
+            compile_next()
         elif token == "\"":
             compile_string()
             compile_next()
     else:
-        start_tag(token)
+        # add tag name to global
+        global tag_name
+        add_tag_name(token)
         compile_next()
-        end_tag(token)
-        compile_next()
+
+# --- Tag globals
+
+tag_names = []
+classes = []
+ids = []
 
 # --- Tag creation
 
-def start_tag(name):
-    output.write(get_tabs() + "<" + name + ">\n")
+def start_tag():
+    global classes
+    global ids
+    tag = "<" + get_tag_name()
+
+    if len(classes) > 0:
+        tag += " class=\""
+        while len(classes) > 1:
+            tag += classes.pop(0) + " "
+        tag += classes.pop(0) + "\""
+    
+    if len(ids) > 0:
+        tag += " id=\""
+        while len(ids) > 1:
+            tag += ids.pop(0) + " "
+        tag += ids.pop(0) + "\""
+
+    tag += ">\n"
+    output.write(get_tabs() + tag)
     inc_tabs()
 
-def end_tag(name):
+def end_tag():
     dec_tabs()
-    output.write(get_tabs() + "</" + name + ">\n")
+    output.write(get_tabs() + "</" + pop_tag_name() + ">\n")
+
+def add_tag_name(name):
+    global tag_names
+    tag_names.append(name)
+
+def get_tag_name():
+    global tag_names
+    if (len(tag_names) > 0):
+        return tag_names[-1]
+    return ""
+
+def pop_tag_name():
+    global tag_names
+    if (len(tag_names) > 0):
+        return tag_names.pop(-1)
+    return ""
 
 def compile_string():
     token = next_token()
