@@ -1,10 +1,13 @@
 file = open("test.txt", "r")
-tokens = open("tokens.txt", "w")
+tokens_file = open("tokens.txt", "w")
 output = open("test.html", "w")
 
 specials = [".", "#", "^", "|", "(", ")", "\"", "{", "}", "$", "*", "_"]
 
-# spl create token files into words and tokens
+tokens = []
+current_token = 0
+
+# create token files into words and tokens_file
 def tokenizer():
     for line in file:
         # ignore comments
@@ -37,49 +40,83 @@ def split_word(word):
             if (word[x] == y):
                 # add word before special character
                 if (x != 0):
-                    tokens.write(word[0:x] + "\n")
+                    tokens_file.write(word[0:x] + "\n")
                 # add special character
-                tokens.write(word[x] + "\n")
+                tokens_file.write(word[x] + "\n")
                 # add words after special character recursively
                 if (x != len(word)):
                     split_word(word[x + 1:len(word)])
                 return
     # if no delimiters were found
-    tokens.write(word + "\n")
+    tokens_file.write(word + "\n")
 
-def parser():
-    for token in tokens:
-        token = token.strip() # remove newline
-        index = special(token)
-        if index != -1:
-            # switch
-            False
-        else:
-            # must be a tag name
-            start_tag(token)
+def initialize_tokens():
+    global tokens 
+    tokens = tokens_file.readlines()
+
+def next_token():
+    global current_token
+    global tokens
+
+    if current_token == len(tokens):
+        return ""
+
+    token = tokens[current_token].strip()
+    current_token += 1
+    return token
+
+def compile_next():
+    token = next_token()
+    if token == "":
+        return
+
+    if is_special(token):
+        if token == "{":
+            # should be compiling a start tag with class and id props
+            compile_next()
+        elif token == "}":
+            return
+        elif token == "\"":
+            compile_string()
+    else:
+        start_tag(token)
+        compile_next()
+        end_tag(token)
+        compile_next()
+
+def compile_string():
+    token = next_token()
+    while token != "\"":
+        token = next_token()
 
 def start_tag(name):
     print "<" + name + ">"
 
-def special(token):
+def end_tag(name):
+    print "</" + name + ">"
+
+def is_special(token):
     for x in specials:
-        if (x == token):
-            return x
-    return -1
+        if x == token:
+            return True
+    return False
 
 # create token file
 tokenizer()
 
-tokens.close()
-tokens = open("tokens.txt", "r")
+tokens_file.close()
+tokens_file = open("tokens.txt", "r")
 
-# create html file
-parser()
+current_token = 0
+initialize_tokens()
+
+# starts the creation of html file
+compile_next()
 
 # close file readers
 file.close()
-tokens.close()
+tokens_file.close()
 
-# delete tokens.txt
+# delete tokens_file.txt
 # import os
 # os.remove("tokens.txt")
