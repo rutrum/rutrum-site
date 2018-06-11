@@ -6,6 +6,9 @@ specials = [".", "#", "^", "|", "(", ")", "\"", "{", "}", "$", "*", "_"]
 
 tokens = []
 current_token = 0
+tabs = 0
+
+# --- tokenizer
 
 # create token files into words and tokens_file
 def tokenizer():
@@ -50,6 +53,8 @@ def split_word(word):
     # if no delimiters were found
     tokens_file.write(word + "\n")
 
+# --- parser
+
 def initialize_tokens():
     global tokens 
     tokens = tokens_file.readlines()
@@ -78,28 +83,57 @@ def compile_next():
             return
         elif token == "\"":
             compile_string()
+            compile_next()
     else:
         start_tag(token)
         compile_next()
         end_tag(token)
         compile_next()
 
-def compile_string():
-    token = next_token()
-    while token != "\"":
-        token = next_token()
+# --- Tag creation
 
 def start_tag(name):
-    print "<" + name + ">"
+    output.write(get_tabs() + "<" + name + ">\n")
+    inc_tabs()
 
 def end_tag(name):
-    print "</" + name + ">"
+    dec_tabs()
+    output.write(get_tabs() + "</" + name + ">\n")
+
+def compile_string():
+    token = next_token()
+    if (token != "\""):
+        output.write(get_tabs() + token)
+        token = next_token()
+    while token != "\"":
+        output.write(" " + token)
+        token = next_token()
+    output.write("\n")
+
+# --- Controls the tabing in html output
+
+def get_tabs():
+    t = ""
+    global tabs
+    for x in range(tabs):
+        t += "    "
+    return t
+
+def inc_tabs():
+    global tabs
+    tabs += 1
+
+def dec_tabs():
+    global tabs
+    tabs -= 1
 
 def is_special(token):
     for x in specials:
         if x == token:
             return True
     return False
+
+# --- Main
 
 # create token file
 tokenizer()
