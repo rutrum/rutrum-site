@@ -7,6 +7,7 @@ specials = [".", "#", "^", "|", "(", ")", "\"", "{", "}", "$", "*", "_"]
 tokens = []
 current_token = 0
 tabs = 0
+last_token = ""
 
 # --- tokenizer
 
@@ -59,9 +60,19 @@ def initialize_tokens():
     global tokens 
     tokens = tokens_file.readlines()
 
+def undo_token(token):
+    global last_token
+    last_token = token
+
 def next_token():
     global current_token
     global tokens
+    global last_token
+
+    if last_token != "":
+        to_return = last_token
+        last_token = ""
+        return to_return
 
     if current_token == len(tokens):
         return ""
@@ -87,13 +98,14 @@ def compile_next():
             global classes
             token = next_token()
             classes.append(token)
-            print token
             compile_next()
         elif token == "#":
             global ids
             token = next_token()
             ids.append(token)
-            print token
+            compile_next()
+        elif token == "|":
+            add_attribute()
             compile_next()
         elif token == "\"":
             compile_string()
@@ -110,11 +122,18 @@ tag_names = []
 classes = []
 ids = []
 
+attributes = []
+
+class Attribute:
+    name = ""
+    value = ""
+
 # --- Tag creation
 
 def start_tag():
     global classes
     global ids
+    global attributes
     tag = "<" + get_tag_name()
 
     if len(classes) > 0:
@@ -128,6 +147,14 @@ def start_tag():
         while len(ids) > 1:
             tag += ids.pop(0) + " "
         tag += ids.pop(0) + "\""
+
+    while len(attributes) > 0:
+        a = attributes.pop(0)
+        if a.value == "":
+            tag += " " + a.name
+        else:
+            tag += " " + a.name + "=\"" + a.value + "\""
+            
 
     tag += ">\n"
     output.write(get_tabs() + tag)
@@ -162,6 +189,27 @@ def compile_string():
         output.write(" " + token)
         token = next_token()
     output.write("\n")
+
+def add_attribute():
+    a = Attribute()
+    a.name = next_token()
+    maybe = next_token()
+    if maybe != "(":
+        attributes.append(a)
+        # need to reset next_token
+        undo_token(maybe)
+        return
+    
+    token = next_token()
+    # no space
+    if token != ")":
+        a.value += token
+        token = next_token()
+    # need leading space
+    while token != ")":
+        a.value += " " + token
+        token = next_token()
+    attributes.append(a)
 
 # --- Controls the tabing in html output
 
