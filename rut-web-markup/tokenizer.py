@@ -1,4 +1,4 @@
-file = open("test.txt", "r")
+file = open("test.rutwm", "r")
 tokens_file = open("tokens.txt", "w")
 output = open("test.html", "w")
 

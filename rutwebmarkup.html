@@ -21,7 +21,11 @@
                 <ul>
                     <li>I don't believe that javascript can read files without an advanced plugin. <br />
                         I need something that can read files easily.  Java is the only one I comfortable with :(</li>
-                    <li><strong>PYTHON</strong> it shall be.  Should be a fun experiment learning a new programming language.</li>
+                    <li><strong>PYTHON</strong> it shall be.  Should be a fun experiment learning a new programming language.
+                        <ul>
+                            <li>It's okay..</li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>file extension: .rutwm</li>
@@ -58,6 +62,28 @@
             <li>also, lets fix h1, h2,... they are so stupid.  lets just create a general header tag with an attribute specific to rutwm</li>
             <li>and apparently, fix tabbing; make \t and \n a thing too</li>
             <li>I want to make a shortcut for defining fonts, just like you do padding and border</li>
+            <li>making lists is stupid it should just know the scope its in.  just start an li tag and roll with it</li>
+            <li>output should not have too much in a single line</li>
+            <li>should be an option in the compiler to space everything or smack everything in a single line</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>things about the compiler</h3>
+        <ul>
+            <li>so so so much wrong with it (and good too I guess)
+                <ul>
+                    <li>preprocesses a "token" file and then rereads it</li>
+                    <li>strings are not treated as a single token that remebers newlines and spacing <br>
+                        which is useful for the style and script tags which should be ultimately untouched</li>
+                    <li>python does a <strong>shitty</strong> job reading a file.  java did a spectacular job by comparison
+                        <ul>
+                            <li>I will need to make my own object that reads through the file a character at a time</li>
+                            <li>need to take care of the "next token" "last token" "look ahead" type functions ahead of time</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </section>
 
