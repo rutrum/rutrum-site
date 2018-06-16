@@ -60,13 +60,14 @@ def compile_attribute():
     global currentTag
 
     name = file.next_token()
-    file.next_token() # Expect (
-    value = file.next_token()
-    if value == ")":
-        currentTag.add_attribute(name, "")
-    else:
+    maybe = file.next_token()
+    if (maybe == "("):
+        value = file.next_token()
         currentTag.add_attribute(name, value)
         file.next_token() # Expect )
+    else:
+        currentTag.add_attribute(name, "")
+        file.undo_token()
 
 def compile_string():
     global file

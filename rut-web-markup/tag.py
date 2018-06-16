@@ -15,16 +15,16 @@ class Tag:
     # Functions that add attributes
 
     def add_id(self, name):
-        self.classes.append(name)
+        self.ids.append(name)
 
     def add_class(self, name):
         self.classes.append(name)
     
     def add_style(self, name, value):
-        self.styles.append(Pair(name, value))
+        self.styles.append(self.Pair(name, value))
     
     def add_attribute(self, name, value):
-        self.attributes.append(Pair(name, value))
+        self.attributes.append(self.Pair(name, value))
 
     # Functions that write tags
 
@@ -56,10 +56,11 @@ class Tag:
         return s
 
     def write_attributes(self):
-        if len(self.styles) == 0:
+        if len(self.attributes) == 0:
             return ""
-        for x in range(0, len(self.styles)):
-            if (self.attributes[x] != ""):
+        s = ""
+        for x in range(0, len(self.attributes)):
+            if (self.attributes[x].value != ""):
                 s += " " + self.attributes[x].name + "=\"" + self.attributes[x].value + "\""
             else:
                 s += " " + self.attributes[x].name
