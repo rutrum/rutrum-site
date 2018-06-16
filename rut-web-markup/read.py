@@ -39,6 +39,7 @@ class Read:
         
         # If end of file, return empty string
         if self.line == "":
+            self.reader.close()
             return ""
 
         # Initialize new last
