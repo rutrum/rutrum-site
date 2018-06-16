@@ -102,6 +102,8 @@ def compile_next():
             ids.append(token)
         elif token == "|":
             add_attribute()
+        elif token == "^":
+            add_style()
         elif token == "\"":
             compile_string()
     else:
@@ -116,8 +118,13 @@ classes = []
 ids = []
 
 attributes = []
+styles = []
 
 class Attribute:
+    name = ""
+    value = ""
+
+class Style:
     name = ""
     value = ""
 
@@ -140,6 +147,15 @@ def start_tag():
         while len(ids) > 1:
             tag += ids.pop(0) + " "
         tag += ids.pop(0) + "\""
+    
+    if len(styles) > 0:
+        tag += " style=\""
+        s = styles.pop(0)
+        tag += s.name + ":" + s.value + ";"
+        while len(styles) > 0:
+            s = styles.pop(0)
+            tag += " " + s.name + ":" + s.value + ";"
+        tag += "\""
 
     while len(attributes) > 0:
         a = attributes.pop(0)
@@ -203,6 +219,23 @@ def add_attribute():
         a.value += " " + token
         token = next_token()
     attributes.append(a)
+
+def add_style():
+    s = Style()
+    s.name = next_token()
+    if next_token() != "(":
+        print "ERROR expectected '('"
+    
+    token = next_token()
+    # no space
+    if token != ")":
+        s.value += token
+        token = next_token()
+    # need leading space
+    while token != ")":
+        s.value += " " + token
+        token = next_token()
+    styles.append(s)
 
 # --- Controls the tabing in html output
 
