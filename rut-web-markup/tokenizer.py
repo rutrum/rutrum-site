@@ -84,37 +84,30 @@ def next_token():
 def compile_next():
     token = next_token()
     if token == "":
-        return
+        return ""
 
     if is_special(token):
         if token == "{":
             # should be compiling a start tag with class and id props
             start_tag()
-            compile_next()
         elif token == "}":
             end_tag()
-            compile_next()
         elif token == ".":
             global classes
             token = next_token()
             classes.append(token)
-            compile_next()
         elif token == "#":
             global ids
             token = next_token()
             ids.append(token)
-            compile_next()
         elif token == "|":
             add_attribute()
-            compile_next()
         elif token == "\"":
             compile_string()
-            compile_next()
     else:
         # add tag name to global
         global tag_name
         add_tag_name(token)
-        compile_next()
 
 # --- Tag globals
 
@@ -246,7 +239,8 @@ current_token = 0
 initialize_tokens()
 
 # starts the creation of html file
-compile_next()
+while compile_next() != "":
+    0
 
 # close file readers
 file.close()
