@@ -4,8 +4,10 @@ from tag import Tag
 file = 0
 output = 0
 depth = []
-
 currentTag = 0
+
+# if a tag name is seen, but a { has not yet been seen, then this value is false
+expected = True
 
 def initialize(filename):
     global file
@@ -19,11 +21,13 @@ def compile_next():
     global output
     global depth
     global currentTag
+    global expected
 
     token = file.next_token()
 
     if token == "{":
         write_tag()
+        expected = True
     elif token == "}":
         end_tag()
     elif token == ".":
@@ -35,12 +39,23 @@ def compile_next():
     elif token == "|":
         compile_attribute()
     elif token == "\"":
-        compile_string()
+        if not expected:
+            currentTag.is_implicit = True
+            write_tag()
+            compile_string()
+            end_tag()
+            expected = True
+        else:
+            compile_string()
     elif token == "":
         # End of file
         return ""
     else:
         # Must be a tag name
+        if not expected:
+            currentTag.is_implicit = True
+            write_tag()
+        expected = False
         currentTag = Tag(token)
 
 
@@ -89,6 +104,9 @@ def end_tag():
     global depth
     dec_tabs()
     output.write(get_tabs() + depth.pop(-1).get_end_tag() + "\n")
+    if len(depth) > 1:
+        if depth[-1].is_implicit:
+            end_tag()
 
 # --- Controls the tabing in html output
 
@@ -114,3 +132,6 @@ def dec_tabs():
 initialize("test")
 while compile_next() != "":
     0
+
+for x in range(len(depth)):
+    print depth[x].name

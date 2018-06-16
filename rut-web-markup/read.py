@@ -42,7 +42,7 @@ class Read:
         # Initialize new last
         self.last = ""
 
-        while self.p < len(self.line) - 1:
+        while self.line[self.p] != "\n":
 
             char = self.line[self.p]
 
@@ -54,7 +54,7 @@ class Read:
                         return self.next_token()
                     self.advance_pointer()
                     self.last = char
-                    return char
+                    return self.last
                 # Already read non-special characters
                 return self.last
 
@@ -80,7 +80,7 @@ class Read:
 
     def return_string(self, expected):
         char = self.line[self.p]
-        while (char != expected and self.p < len(self.line) - 1):
+        while char != expected:
             self.last += char
             self.advance_pointer()
             char = self.line[self.p]

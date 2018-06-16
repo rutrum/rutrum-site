@@ -11,6 +11,7 @@ class Tag:
         self.classes = []
         self.styles = []
         self.attributes = []
+        self.is_implicit = False
 
     # Functions that add attributes
 
