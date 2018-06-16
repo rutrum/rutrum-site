@@ -59,7 +59,10 @@ class Tag:
         if len(self.styles) == 0:
             return ""
         for x in range(0, len(self.styles)):
-            s += " " + self.attributes[x].name + "=\"" + self.attributes[x].value + "\""
+            if (self.attributes[x] != ""):
+                s += " " + self.attributes[x].name + "=\"" + self.attributes[x].value + "\""
+            else:
+                s += " " + self.attributes[x].name
         return s
 
     def get_start_tag(self):
