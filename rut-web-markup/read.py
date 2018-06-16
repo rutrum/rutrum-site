@@ -9,6 +9,7 @@ class Read:
         self.p = 0
         self.use_last = False
         self.last = ""
+        self.found_quotes = False
 
     def next_token(self):
 
@@ -17,8 +18,22 @@ class Read:
             self.use_last = False
             return self.last
 
+        # If expected token is a string (or end of one)
+        if self.last == "\"":
+            if self.found_quotes:
+                self.found_quotes = False
+            else:
+                self.found_quotes = True
+                self.last = ""
+                return self.return_string("\"")
+
+        # If expected token is a parameter
+        if self.last == "(":
+            self.last = ""
+            return self.return_string(")")
+
         # If pointer is past line, get new line
-        if self.p >= len(self.line):
+        if self.p >= len(self.line) - 1: # -1 ignores \n
             self.line = self.reader.readline()
             self.p = 0
         
@@ -29,7 +44,7 @@ class Read:
         # Initialize new last
         self.last = ""
 
-        while self.p < len(self.line):
+        while self.p < len(self.line) - 1:
 
             char = self.line[self.p]
 
@@ -54,12 +69,25 @@ class Read:
                 self.last += char
                 self.p += 1
 
+        # If returning trailing spaces, try again with next line
+        if self.last == "":
+            return self.next_token()
+
         # Reached end of line; return what was found
         return self.last
 
-    def is_special(self, token):
+    def return_string(self, expected):
+        char = self.line[self.p]
+        while (char != expected and self.p < len(self.line) - 1):
+            self.last += char
+            self.p += 1
+            char = self.line[self.p]
+        return self.last
+
+    # Is the character a special character?
+    def is_special(self, char):
         for x in self.specials:
-            if x == token:
+            if x == char:
                 return True
         return False
 
