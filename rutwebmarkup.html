@@ -84,6 +84,30 @@
                     </li>
                 </ul>
             </li>
+            <li>All that shit is fixed</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>things to do now that I have a working compiler</h3>
+        <ul>
+            <li>user defined variables</li>
+            <li>user defined tags
+                <ul>
+                    <li>first, simple tags that just hold attribute information (can overwrite existing html tags) <br>
+                        a(x) -> b(x)
+                    </li>
+                    <li>next, compound tags that have a single tag within a single tag <br>
+                        a(x) -> b(c(...f(g(x))...))
+                    </li>
+                    <li>next, compound tags that have multiple tags within a single tag, still only one is variable <br>
+                        a(x) -> b(c,d(x))
+                    </li>
+                    <li>next, compound variables tags <br>
+                        a(x,y,z) -> b(c(d,e(x)),f(y),g(z))
+                    </li>
+                </ul>
+            </li>
         </ul>
     </section>
 
